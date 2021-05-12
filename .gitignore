@@ -1,0 +1,45 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.idea
+
+# testing
+/coverage
+
+# production
+/build
+/dist
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/index_bundle.js
+dist/index.html
+dist/fonts/brand-icons.eot
+dist/fonts/brand-icons.svg
+dist/fonts/brand-icons.ttf
+dist/fonts/brand-icons.woff
+dist/fonts/brand-icons.woff2
+dist/fonts/icons.eot
+dist/fonts/icons.svg
+dist/fonts/icons.ttf
+dist/fonts/icons.woff
+dist/fonts/icons.woff2
+dist/fonts/outline-icons.eot
+dist/fonts/outline-icons.svg
+dist/fonts/outline-icons.ttf
+dist/fonts/outline-icons.woff
+dist/fonts/outline-icons.woff2
+dist/images/brand-icons.svg
+dist/images/flags.png
+dist/images/icons.svg
+dist/images/outline-icons.svg
+dist/images/white-image.png
