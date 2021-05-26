@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const App = () => (
+const Accueil = () => (
     <>
         <h1>Hello World</h1>
 
@@ -8,4 +8,4 @@ const App = () => (
     </>
 )
 
-export default App;
+export default Accueil;
