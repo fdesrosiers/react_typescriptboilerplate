@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
+import { CarState } from '../reducers/carsReducer';
+import carsReducer from '../reducers/carsReducer';
 
-export const appReducers =  combineReducers<IStoreState> ({
-
+export const appReducers =  combineReducers<IApplicationState> ({
+    carsReducer
 });
 
 
-export interface IStoreState {
-
+export interface IApplicationState {
+    carsReducer: CarState,
 }
