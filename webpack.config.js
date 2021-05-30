@@ -6,7 +6,7 @@ module.exports = {
   entry: './src/index.tsx',
   target: "web",
   mode: "development",  
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -54,6 +54,7 @@ module.exports = {
   },
   devServer: {
     contentBase: './dist',
+
   },  
   plugins: [
     new webpack.IgnorePlugin(/^\.\/config\.js$/),

@@ -16,7 +16,10 @@ export type FETCH_MODELS = typeof FETCH_MODELS;
 export const MODELS_RECEIVED = 'MODELS_RECEIVED';
 export type MODELS_RECEIVED = typeof MODELS_RECEIVED;
 
-export type carsActions = FetchYears | FetchMakes | MakesReceived | FetchModels|ModelsReceived;
+export const MODEL_SELECTED = 'MODEL_SELECTED';
+export type MODEL_SELECTED = typeof MODEL_SELECTED;
+
+export type carsActions = FetchYears | FetchMakes | MakesReceived | FetchModels|ModelsReceived|ModelSelected;
 
 export interface FetchYears {
     type: FETCH_YEARS;
@@ -24,7 +27,7 @@ export interface FetchYears {
 
 export interface FetchMakes {
     type: FETCH_MAKES;
-    year: string
+    yearSelected: string
 }
 
 export interface MakesReceived {
@@ -34,13 +37,40 @@ export interface MakesReceived {
 
 export interface FetchModels {
     type: FETCH_MODELS;
-    make: string
-    year: string;
+    yearSelected: string,
+    makeSelected: string,
 }
 
 export interface ModelsReceived {
     type: MODELS_RECEIVED;
     models: Model[];
+}
+
+export interface ModelSelected {
+    type: MODEL_SELECTED;
+    model: string;
+}
+
+export function fetchYears(): FetchYears {
+    return {
+        type: FETCH_YEARS
+    };
+}
+
+export function fetchMakes(year : string): FetchMakes {
+    return {
+        type: FETCH_MAKES,
+        yearSelected: year
+    };
+}
+
+
+export function fetchModels(year : string, make: string): FetchModels {
+    return {
+        type: FETCH_MODELS,
+        yearSelected: year,
+        makeSelected: make,
+    };
 }
 
 export const makesReceived = (makes: Make[]) => {
@@ -54,5 +84,12 @@ export const modelsReceived = (models: Model[]) => {
     return {
         type: MODELS_RECEIVED,
         models: models
+    };
+};
+
+export const modelSelected = (model: string) => {
+    return {
+        type: MODEL_SELECTED,
+        model: model
     };
 };

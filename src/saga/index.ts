@@ -1,10 +1,11 @@
-/* à déterminer */ 
-const sagas = {
+import * as carSaga from './carSaga';
 
+const sagas:any = {
+    ...carSaga
 };
 
 export function registerWithMiddleware(middleware: { run: Function }) {
-    for (const field of Object.keys(sagas)) {
-        // middleware.run(sagas[field]);
+    for (let name in sagas) {
+        middleware.run(sagas[name]);
     }
 }

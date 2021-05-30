@@ -3,10 +3,15 @@ import { FetchMakes,makesReceived,FETCH_MAKES ,FetchModels,modelsReceived,FETCH_
 import CarsAPI from '../api/carsAPI';
 import { Make,Model } from '../api/carsApiType';
 
+
+
 function* handleFetchMakes(action: FetchMakes) {
-    let makes: Make[];
-    makes = yield call(CarsAPI.getMakesAsync,action.year);
-    yield put(makesReceived(makes));
+    let makes: {Makes :Make[]};
+    let carsAPI = new CarsAPI();
+
+    makes = yield call(carsAPI.getMakesAsync,action.yearSelected);
+
+    yield put(makesReceived(makes.Makes));
 }
 
 export function* fetchMakesSaga() {
@@ -14,9 +19,10 @@ export function* fetchMakesSaga() {
 }
 
 function* handleFetchModels(action: FetchModels) {
-    let models: Model[];
-    models = yield call(CarsAPI.getModelsAsync,action.year,action.make);
-    yield put(modelsReceived(models));
+    let models:{ Models:Model[]};
+    let carsAPI = new CarsAPI();
+    models = yield call(carsAPI.getModelsAsync,action.yearSelected,action.makeSelected);
+    yield put(modelsReceived(models.Models));
 }
 
 export function* fetchModelsSaga() {
