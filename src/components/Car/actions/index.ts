@@ -19,7 +19,10 @@ export type MODELS_RECEIVED = typeof MODELS_RECEIVED;
 export const MODEL_SELECTED = 'MODEL_SELECTED';
 export type MODEL_SELECTED = typeof MODEL_SELECTED;
 
-export type carsActions = FetchYears | FetchMakes | MakesReceived | FetchModels|ModelsReceived|ModelSelected;
+export const MODEL_ADDED = 'MODEL_ADDED';
+export type MODEL_ADDED = typeof MODEL_ADDED;
+
+export type carsActions = FetchYears | FetchMakes | MakesReceived | FetchModels|ModelsReceived|ModelSelected|ModelAdded;
 
 export interface FetchYears {
     type: FETCH_YEARS;
@@ -49,6 +52,16 @@ export interface ModelsReceived {
 export interface ModelSelected {
     type: MODEL_SELECTED;
     model: string;
+}
+
+export interface ModelAdded{
+    type: MODEL_ADDED;
+}
+
+export function addModel(): ModelAdded {
+    return {
+        type: MODEL_ADDED
+    };
 }
 
 export function fetchYears(): FetchYears {

@@ -54,7 +54,6 @@ module.exports = {
   },
   devServer: {
     contentBase: './dist',
-
   },  
   plugins: [
     new webpack.IgnorePlugin(/^\.\/config\.js$/),

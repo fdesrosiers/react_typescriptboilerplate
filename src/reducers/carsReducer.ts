@@ -1,4 +1,4 @@
-import { carsActions, FETCH_YEARS,MAKE_RECEIVED, MODELS_RECEIVED,FETCH_MAKES, FETCH_MODELS,MODEL_SELECTED} from '../components/Car/actions/index';
+import { carsActions, FETCH_YEARS,MAKE_RECEIVED, MODELS_RECEIVED,FETCH_MAKES, FETCH_MODELS,MODEL_SELECTED,MODEL_ADDED} from '../components/Car/actions/index';
 import { Make,Model } from '../api/carsApiType';
 
 export interface CarState  {
@@ -8,7 +8,10 @@ export interface CarState  {
 
     Models : string[];
     Makes : string[];
-    Years : string[]
+    Years : string[];
+
+    isValid:boolean;
+    selectCars : string[];
 }
 
 export const initialState: CarState = {
@@ -18,6 +21,8 @@ export const initialState: CarState = {
         Models : [],
         Makes : [],
         Years :  [],
+        isValid:false,
+        selectCars:[],
 }
 
 export default function carsReducer(state: CarState = initialState, action: carsActions) {
@@ -33,7 +38,9 @@ export default function carsReducer(state: CarState = initialState, action: cars
         case MODELS_RECEIVED:
             return handleModelsReceived(state,action.models);
         case MODEL_SELECTED:
-            return handleModelSelected(state,action.model);                         
+            return handleModelSelected(state,action.model); 
+        case MODEL_ADDED:
+            return handleModelAdded(state); 
         default:
             return state;
     }
@@ -62,20 +69,26 @@ function getTransformedMakes(makes: Make[]) {
  }
 
 const handleYearSelected = (state: CarState,yearSelected:string) => {
-    return {...state,  selectedYear: yearSelected,selectedMake:'',selectedModel:''};
+    return {...state,  selectedYear: yearSelected,selectedMake:'',selectedModel:'',isValid:false };
 }
 
 const handleMakeSelected = (state: CarState,makeSelected:string) => {
-    return {...state,  selectedMake: makeSelected,selectedModel:''};
+    return {...state,  selectedMake: makeSelected,selectedModel:'',isValid:false };
 }
 
 const handleModelSelected = (state: CarState,modelSelected:string) => {
-    return {...state, selectedModel:modelSelected};
+    return {...state, selectedModel:modelSelected,isValid:true};
 }
 
  const handleModelsReceived = (state: CarState, models: Model[] ) => {
     const stateModels = getTransformedModels(models);
     return {...state,  Models: stateModels};
+}
+
+const handleModelAdded = (state: CarState) => {
+    let newSelectedCars =state.selectCars;
+    newSelectedCars.push(`${state.selectedYear}  ${state.selectedMake}  ${state.selectedModel}`);
+    return {...state,  selectCars:newSelectedCars, selectedYear:'',selectedMake:'',selectedModel:''  ,isValid:false};
 }
 
 function getTransformedModels(models: Model[]) {

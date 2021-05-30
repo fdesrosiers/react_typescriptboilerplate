@@ -1,19 +1,36 @@
 import * as React from 'react';
 
 export interface AccueilPresentationProps {
-
+      carsSelected: string[],
+      isValid: boolean,
+      onAddCar: (e: React.SyntheticEvent<EventTarget>) => void;
 }
 
-// const ProgramEditor = (props: ProgramProps) => {
-//     return (
-//         <form>
-//                 {/* <TextInput name="code" label="Code" value={props.program.code} placeholder="Code du programme" onChange={props.onChange} error={props.errors['code']}/>
-
-//                 <TextInput name="nom" label="Nom" value={props.program.nom} placeholder="Nom du programme" onChange={props.onChange} error={props.errors['nom']}/> */}
-
-//                 <input type="submit" value="Sauvegarder" className="btn btn-default" onClick={props.onSave}/>
-//         </form>
-//     );
-// };
-
-// export default ProgramEditor;
+export const AccueilPresentation: React.FunctionComponent<AccueilPresentationProps> = (props) => {
+    return (
+            <>
+            <div>
+                <h1>Liste de vos voitures de rêve</h1>
+                <div>
+                <input type="submit" value="Ajouter une voiture" onClick={props.onAddCar} disabled={!props.isValid}/>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Description des voitures</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {props.carsSelected.map(currentCar => {
+                           return (
+                                  <tr key={currentCar}>
+                                      <td>{currentCar}</td>
+                                 </tr>
+                                 );
+                        })}
+                    </tbody>
+                </table>
+            </div>
+            </>
+    )
+}
